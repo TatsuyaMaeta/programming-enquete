@@ -1,0 +1,15 @@
+#form-table{
+    margin: 0 auto;
+}
+
+li{
+    list-style-type: none;
+}
+
+#myBarChart{
+    margin: 50px 3%;
+}
+
+#myPieChart{
+    margin: 100px 3% 0;
+}
