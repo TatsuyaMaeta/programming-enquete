@@ -4,6 +4,7 @@
 <?php
 //文字作成
 // $str = date("Y-m-d H:i:s");
+// test
 
     include("funcs.php");
     $name = $_POST["name"];
