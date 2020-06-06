@@ -36,3 +36,8 @@
 こいし,20,male,[html,css,php,python,swift,Ruby,Java,Go,VBA]
 <script>alert("Hi")</script>,10,male,[html,php,python,Ruby,Go]
 前田達也,10,female,[css]
+,10,,[css,javascript,php,swift,Ruby,Java,C,Go,VBA]
+前田達也,50,female,[html,php,swift,Ruby,Java]
+マエタ,20,male,[css,Java]
+ますだ,20,male,[html,php,python,swift,C]
+近藤,60,female,[python,swift,Ruby,Java,Go,VBA]
