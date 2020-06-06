@@ -11,7 +11,7 @@
     // https://phpjavascriptroom.com/?t=php&p=mbstring
 
         $contents = file("data/data.txt");
-        echo var_dump($contents);
+        // echo var_dump($contents);
 
         // 登録してある人数が返り値
         $arr_length = count($contents);
@@ -52,9 +52,9 @@
             // programmingだけを抽出
             $dbl_arr[$i][3]=mb_substr($contents[$i],$org3+2,$org4-2); //カッコで括っていた分１つ余計に数値を増やして処理
 
-            echo $contents[$i]."<br>";
-            echo var_dump($dbl_arr[$i])."<br>";
-            echo $dbl_arr;
+            // echo $contents[$i]."<br>";
+            // echo var_dump($dbl_arr[$i])."<br>";
+            // echo $dbl_arr;
         }
         // echo var_dump($dbl_arr)."<br>";
 
@@ -78,9 +78,12 @@
 
         // 人数分の配列を回す
         for ($i=0; $i < $arr_length; $i++) { 
+            // 配列の結合方法
+            // https://www.sejuku.net/blog/28533
 
             // 年齢が何歳なのか判定
             if ($dbl_arr[$i][1] <= 29) {
+
                 // チェックボックスで選択された項目を全て配列に格納
                 $under_30_total_pg =array_merge($under_30_total_pg , explode(",", $dbl_arr[$i][3]));
                 // echo $dbl_arr[$i][0]."の".$dbl_arr[$i][1]."は30才未満<br>";
@@ -158,9 +161,43 @@ var  js_list70 =JSON.parse('<?php echo $json_list_under_70; ?>');
 var  js_list_male =JSON.parse('<?php echo $json_list_male; ?>'); 
 var  js_list_female =JSON.parse('<?php echo $json_list_female; ?>'); 
 
-// console.log(js_list30);
-// console.log(typeof js_list30);
-// console.log(Object.keys(js_list30));
+console.log(js_list30);
+console.log(typeof js_list30);
+console.log(Object.keys(js_list30));
+console.log(js_list30.length);
+console.log("連想配列0番目のkey: " +Object.keys(js_list30)[0]);     // key:html
+console.log("htmlのvalue: " + Object.values(js_list30)[0]);   // value:9
+
+
+// valueから連想配列となっているkeyを取得する方法 ----------------------
+// https://qiita.com/Test_test/items/7d532f445f2980e896d0
+var find_value = 'python';
+console.log("find_value =" + find_value);
+const key_name = Object.keys(js_list30);
+for (let i=0; i < key_name.length; i++) {
+    let key = key_name[i];
+    let val = js_list30[key];   //val = js_list30[key_name[i]]
+    // console.log("key: " + key);
+    // console.log("val: " + val);
+
+    if (key == find_value) {
+        console.log('index = ' + String(i));　　// 3
+        break;
+    }
+}
+// valueから連想配列となっているkeyを取得する方法 ----------------------
+
+
+//最大値を取得
+var $max_num =Object.values(js_list30)[0];  //初期値として配列の最初のvalueを代入
+console.log("初期値の最大値: "+ $max_num);      //値の変化を確認するために初期値を表示
+for (let i = 0; i < Object.values(js_list30).length; i++) {
+    if ($max_num < Object.values(js_list30)[i]) {
+        $max_num = Object.values(js_list30)[i]
+    }
+}
+console.log("最終的な最大値"+$max_num);        //最終的な最大値を確認
+
 // console.log(Object.keys(js_list30));
 // console.log(js_list30.html);
 
@@ -170,20 +207,59 @@ var  js_list_female =JSON.parse('<?php echo $json_list_female; ?>');
 
 
 
-var ctx = document.getElementById("myBarChart");
-var myBarChart = new Chart(ctx, {
+// official Docs
+// https://misc.0o0o.org/chartjs-doc-ja/
 
+// Chart.jsでグラフを描画してみた
+// https://qiita.com/Haruka-Ogawa/items/59facd24f2a8bdb6d369
+var ctx = document.getElementById("myBarChart");
+
+var myBarChart = new Chart(ctx, {
 type: 'bar',
 data: {
-    labels: ['HTML', 'CSS', 'Javascript', 'Ruby','Python', 'swift','PHP', 'Go', 'Java','VBA', 'C'],
+    labels:[Object.keys(js_list30)[0],   //html
+            Object.keys(js_list30)[1],   //css
+            Object.keys(js_list30)[2],   //javascript
+            Object.keys(js_list30)[3],   //Ruby
+            Object.keys(js_list30)[4],   //python
+            Object.keys(js_list30)[5],   //'swift'
+            Object.keys(js_list30)[6],   //'PHP'
+            Object.keys(js_list30)[7],   //'Go'
+            Object.keys(js_list30)[8],   //'Java'
+            Object.keys(js_list30)[9],   //'VBA'
+            Object.keys(js_list30)[10]   //'C'
+            ],
+
     datasets: [
     {
         label: 'age-10~29',
-        data: [js_list30.html, js_list30.css, js_list30.javascript, js_list30.Ruby, js_list30.python, js_list30.swift, js_list30.php, js_list30.Go, js_list30.Java, js_list30.VBA, js_list30.C],
+        data:[Object.values(js_list30)[0],
+            Object.values(js_list30)[1],
+            Object.values(js_list30)[2], 
+            Object.values(js_list30)[3],
+            Object.values(js_list30)[4],    //js_list30.python, 
+            Object.values(js_list30)[5],    //js_list30.swift, 
+            Object.values(js_list30)[6],    //js_list30.php, 
+            Object.values(js_list30)[7],    //js_list30.Go, 
+            Object.values(js_list30)[8],    //js_list30.Java, 
+            Object.values(js_list30)[9],    //js_list30.VBA, 
+            Object.values(js_list30)[10]     //js_list30.C],
+        ],
         backgroundColor: "rgba(219,39,91,0.5)"
     },{
         label: 'age-30~39',
-        data: [js_list30.html, js_list40.css, js_list40.javascript, js_list40.Ruby, js_list40.python, js_list40.swift, js_list40.php, js_list40.Go, js_list40.Java, js_list40.VBA, js_list40.C],
+        data: [js_list40.html, 
+            js_list40.css, 
+            js_list40.javascript, 
+            js_list40.Ruby, 
+            js_list40.python, 
+            js_list40.swift, 
+            js_list40.php, 
+            js_list40.Go, 
+            js_list40.Java, 
+            js_list40.VBA, 
+            js_list40.C
+        ],
         backgroundColor: "rgba(130,201,169,0.5)"
     },{
         label: 'age-40~59',
@@ -201,7 +277,7 @@ options: {
     scales: {
     yAxes: [{
         ticks: {
-        suggestedMax: 16,
+        suggestedMax: $max_num + 1,
         suggestedMin: 0,
         stepSize: 1,
         callback: function(value, index, values){
@@ -210,6 +286,15 @@ options: {
         }
     }]
     },
+    layout: {                      //レイアウト
+        padding: {                 //余白設定
+            left: 10,
+            right: 50,
+            top: 0,
+            bottom: 0
+        }
+    },
+    responsive: true
 }
 });
 </script>
@@ -228,11 +313,13 @@ data: {
     labels: ["男性", "女性"],
     datasets: [{
         backgroundColor: [
-            "#BB5179",
-            "#FAFF67",
-
+            "#2B5179",
+            "#F2F207",
         ],
-        data: [js_list_male.male, js_list_female.female]
+        data: [
+            js_list_male.male, 
+            js_list_female.female
+        ]
     }]
 },
 options: {
@@ -240,10 +327,11 @@ options: {
     display: true,
     text: '新規入学者男女差 割合',
     fontSize: 36
-    }
+    },
+    responsive: true
 }
 });
-  </script>
+</script>
 
 
 </div>
