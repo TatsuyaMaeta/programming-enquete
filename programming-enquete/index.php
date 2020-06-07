@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books Ranking</title>
+    <title>Programmingに関するアンケートのお願い</title>
     <link rel="stylesheet" href="./css/style_for_post.css">
 </head>
 <body>
-<p>C's ∀cademy Kyoto　に新規御入学者様へのアンケート</p>
+<p>C's ∀cademy Kyoto に新規御入学者様へのアンケート</p>
 <form action="post_programing.php" method="post" id="form-table">
         <table>
 
